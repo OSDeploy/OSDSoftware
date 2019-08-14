@@ -6,7 +6,7 @@ Download software related to OS Deployment
 Download software related to OS Deployment, including the ADK and MDT
 
 .LINK
-https://www.osdeploy.com/osdsoftware/docs/functions/get-osdsoftware
+https://osdsoftware.osdeploy.com/module/functions/get-osdsoftware
 
 .PARAMETER Name
 Name of the software to download

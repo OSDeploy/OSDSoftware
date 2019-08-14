@@ -6,7 +6,7 @@ Updates the OSDSoftware PowerShell Module to the latest version
 Updates the OSDSoftware PowerShell Module to the latest version from the PowerShell Gallery
 
 .LINK
-https://www.osdeploy.com/osdsoftware/docs/functions/update-moduleosdsoftware
+https://osdsoftware.osdeploy.com/module/functions/update-moduleosdsoftware
 
 .Example
 Update-ModuleOSDSoftware
