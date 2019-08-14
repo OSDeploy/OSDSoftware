@@ -90,19 +90,19 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('OSDeploy','OSD','Update')
+        Tags = @('OSDeploy','OSD','Software')
 
         # A URL to the license for this module.
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://www.osdeploy.com/osdsoftware/home'
+        ProjectUri = 'https://osdsoftware.osdeploy.com/'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'https://www.osdeploy.com/osdsoftware/releases'
+        ReleaseNotes = 'https://osdsoftware.osdeploy.com/module/release'
 
     } # End of PSData hashtable
 
