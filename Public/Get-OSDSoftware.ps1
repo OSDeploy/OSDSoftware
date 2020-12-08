@@ -25,18 +25,25 @@ function Get-OSDSoftware {
     PARAM (
         [Parameter(Position=0,Mandatory=$true)]
         [ValidateSet(`
-            'Google Chrome Enterprise x64',`
-            'Microsoft ADK 1803',`
-            'Microsoft ADK 1809',`
-            'Microsoft ADK 1809 WinPE Addon',`
-            'Microsoft MDT 8456 x86',`
-            'Microsoft MDT 8456 x64',`
-            'Microsoft VS code User x64',`
-            'Microsoft VS code System x64'`
+            'Dell Display Manager',
+            'Google Chrome Enterprise x64',
+            'Microsoft ADK 1803',
+            'Microsoft ADK 1809',
+            'Microsoft ADK 1809 WinPE Addon',
+            'Microsoft ADK 1903',
+            'Microsoft ADK 1903 WinPE Addon',
+            'Microsoft ADK 2004',
+            'Microsoft ADK 2004 WinPE Addon',
+            'Microsoft MDT 8456 x86',
+            'Microsoft MDT 8456 x64',
+            'Microsoft MDT Hotfix 4564442',
+            'Microsoft VS code User x64',
+            'Microsoft VS code System x64'
         )]
         [string]$Name,
         [Parameter(Position=1)]
-        [string]$DownloadPath
+        [string]$DownloadPath,
+        [switch]$Run
     )
     #===================================================================================================
     #   Variables
@@ -55,31 +62,56 @@ function Get-OSDSoftware {
     #===================================================================================================
     #   Software
     #===================================================================================================
-    if ($Name -eq 'Google Chrome Enterprise x64') {OSDSchrome}
-    if ($Name -eq 'Microsoft ADK 1803') {OSDSadk1803}
-    if ($Name -eq 'Microsoft ADK 1809') {OSDSadk1809}
-    if ($Name -eq 'Microsoft ADK 1809 WinPE Addon') {OSDSadk1809PE}
-    if ($Name -eq 'Microsoft MDT 8456 x86') {OSDSmdt32}
-    if ($Name -eq 'Microsoft MDT 8456 x64') {OSDSmdt64}
-    if ($Name -eq 'Microsoft VS code User x64') {OSDSmscodeu}
-    if ($Name -eq 'Microsoft VS code System x64') {OSDSmscodes}
+    if ($Name -eq 'Dell Display Manager') {InfoDellDisplayManager}
+    if ($Name -eq 'Google Chrome Enterprise x64') {InfoGoogleChrome}
+    if ($Name -eq 'Microsoft ADK 1803') {InfoADK1803}
+    if ($Name -eq 'Microsoft ADK 1809') {InfoADK1809}
+    if ($Name -eq 'Microsoft ADK 1809 WinPE Addon') {InfoADK1809PE}
+    if ($Name -eq 'Microsoft ADK 1903') {InfoADK1903}
+    if ($Name -eq 'Microsoft ADK 1903 WinPE Addon') {InfoADK1903PE}
+    if ($Name -eq 'Microsoft ADK 2004') {InfoADK2004}
+    if ($Name -eq 'Microsoft ADK 2004 WinPE Addon') {InfoADK2004PE}
+    if ($Name -eq 'Microsoft MDT 8456 x86') {InfoMDTx86}
+    if ($Name -eq 'Microsoft MDT 8456 x64') {InfoMDTx64}
+    if ($Name -eq 'Microsoft MDT Hotfix 4564442') {InfoMDTHotfix}
+    if ($Name -eq 'Microsoft VS code User x64') {InfoVSCodeUser}
+    if ($Name -eq 'Microsoft VS code System x64') {InfoVSCodeSystem}
     #===================================================================================================
     #   Download
     #===================================================================================================
-    Write-Host "Download Url: $OSDDownloadUrl" -ForegroundColor Cyan
-    Write-Host "Download Full Path: $DownloadPath\$OSDDownloadFileName" -ForegroundColor Cyan
-    Write-Host "Download Method: $OSDDownloadMethod" -ForegroundColor Cyan
+    Write-Verbose -Verbose "Downloading from $OSDDownloadUrl using $OSDDownloadMethod"
+    #Write-Host -ForegroundColor DarkGray "Saving As: $DownloadPath\$OSDDownloadFileName"
+    #Write-Host -ForegroundColor DarkGray "Download Method: $OSDDownloadMethod"
+    #===================================================================================================
+    #   BITS
+    #===================================================================================================
     if ($OSDDownloadMethod -eq 'BITS') {
         Start-BitsTransfer -Source $OSDDownloadUrl -Destination "$DownloadPath"
     }
+    #===================================================================================================
+    #   WebClient
+    #===================================================================================================
     if ($OSDDownloadMethod -eq 'WebClient') {
-        Write-Warning "Downloading without progress ..."
+        if (Test-Path "$DownloadPath\$OSDDownloadFileName") {
+            Write-Warning "Overwriting existing file $DownloadPath\$OSDDownloadFileName"
+        } else {
+            Write-Warning "Downloading to $DownloadPath\$OSDDownloadFileName"
+        }
         (New-Object System.Net.WebClient).DownloadFile("$OSDDownloadUrl", "$DownloadPath\$OSDDownloadFileName")
-        #Start-BitsTransfer -Source $OSDDownloadUrl -Destination "$DownloadPath\$OSDDownloadFileName"
+        if (Test-Path "$DownloadPath\$OSDDownloadFileName") {
+            Write-Verbose -Verbose "Download Complete"
+            if ($Run -eq $true) {
+                & "$DownloadPath\$OSDDownloadFileName"
+            }
+        }
     }
+    #===================================================================================================
+    #   WebRequest
+    #===================================================================================================
     if ($OSDDownloadMethod -eq 'WebRequest') {
         #$DownloadFileName = [System.IO.Path]::GetFileName((Get-RedirectedUrl "$OSDDownloadUrl"))
         #Write-Host $DownloadFileName
         Invoke-WebRequest -Uri $OSDDownloadUrl -OutFile "$DownloadPath\$OSDDownloadFileName"
+
     }
 }

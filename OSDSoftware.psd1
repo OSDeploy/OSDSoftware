@@ -7,7 +7,7 @@
 RootModule = 'OSDSoftware.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.8.14.0'
+ModuleVersion = '20.12.8.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -22,10 +22,22 @@ Author = 'David Segura'
 CompanyName = 'osdeploy.com'
 
 # Copyright statement for this module
-Copyright = '(c) 2019 David Segura osdeploy.com. All rights reserved.'
+Copyright = '(c) 2020 David Segura osdeploy.com. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'OSDSoftware is used to download the latest Google Chrome, Microsoft ADK, Microsoft MDT, and the latest Microsoft VS code'
+Description = @'
+OSDSoftware is used to download some software
+- Dell Display Manager (Latest)
+- Google Chrome Enterprise x64 (Latest)
+- Microsoft ADK 1803
+- Microsoft ADK 1809
+- Microsoft ADK 1809 WinPE Addon
+- Microsoft MDT 8456 x86
+- Microsoft MDT 8456 x64
+- Microsoft MDT Hotfix 4564442
+- Microsoft VS code User x64 (Latest)
+- Microsoft VS code System x64 (Latest)
+'@
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
@@ -93,13 +105,13 @@ PrivateData = @{
         Tags = @('OSDeploy','OSD','Software')
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/OSDeploy/OSDSoftware/blob/master/LICENSE'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://osdsoftware.osdeploy.com/'
+        ProjectUri = 'https://github.com/OSDeploy/OSDSoftware'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://raw.githubusercontent.com/OSDeploy/OSDSoftware/master/OSD.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = 'https://osdsoftware.osdeploy.com/module/release'
