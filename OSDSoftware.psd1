@@ -7,7 +7,7 @@
 RootModule = 'OSDSoftware.psm1'
 
 # Version number of his module.
-ModuleVersion = '20.12.8.1'
+ModuleVersion = '20.12.8.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -32,6 +32,10 @@ OSDSoftware is used to download some software
 - Microsoft ADK 1803
 - Microsoft ADK 1809
 - Microsoft ADK 1809 WinPE Addon
+- Microsoft ADK 1903
+- Microsoft ADK 1903 WinPE Addon
+- Microsoft ADK 2004
+- Microsoft ADK 2004 WinPE Addon
 - Microsoft MDT 8456 x86
 - Microsoft MDT 8456 x64
 - Microsoft MDT Hotfix 4564442
